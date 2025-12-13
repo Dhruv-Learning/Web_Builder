@@ -81,6 +81,7 @@ export function CodeGeniusProvider({ children }: { children: ReactNode }) {
       return;
     }
     setIsLoading(true);
+    setGeneratedCode({ html: '', css: '', javascript: '', sections: [] });
     try {
       const result = await generateWebsiteLayout({ prompt: currentPrompt });
       setGeneratedCode({
@@ -102,7 +103,6 @@ export function CodeGeniusProvider({ children }: { children: ReactNode }) {
     toast({ title: "Writing content...", description: "AI is generating text for your website." });
     try {
         const textResult = await generateWebsiteText({ prompt });
-        // This is a simplified approach. A real implementation would parse the HTML and replace placeholders.
         const newHtml = generatedCode.html.replace(/Lorem Ipsum/gi, textResult.websiteText);
         setGeneratedCode(prev => ({ ...prev, html: newHtml }));
     } catch (error) {
@@ -118,7 +118,6 @@ export function CodeGeniusProvider({ children }: { children: ReactNode }) {
     toast({ title: "Fixing design...", description: "AI is improving your website's design." });
     try {
         const designResult = await autoFixDesign({ websiteContent: generatedCode.html + `<style>${generatedCode.css}</style>` });
-        // This is simplified. We'd need to parse the HTML and CSS apart.
         const htmlMatch = designResult.improvedWebsiteContent.match(/<body>([\s\S]*)<\/body>/);
         const cssMatch = designResult.improvedWebsiteContent.match(/<style>([\s\S]*)<\/style>/);
         
@@ -132,7 +131,6 @@ export function CodeGeniusProvider({ children }: { children: ReactNode }) {
              setGeneratedCode(prev => ({ ...prev, html: htmlMatch[1]}));
         }
          else {
-            // If no body or style tags are found, maybe the whole thing is HTML
             setGeneratedCode(prev => ({ ...prev, html: designResult.improvedWebsiteContent }));
         }
 

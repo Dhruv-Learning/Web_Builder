@@ -22,7 +22,7 @@ export default function CodeGeniusSidebar() {
             <Download className="w-5 h-5" /> Export
             </TabsTrigger>
         </TabsList>
-        <div className="flex-1 overflow-y-auto">
+        <ScrollArea className="flex-1">
             <TabsContent value="design" className="p-6">
               <DesignPanel />
             </TabsContent>
@@ -32,7 +32,7 @@ export default function CodeGeniusSidebar() {
             <TabsContent value="export" className="p-6">
               <ExportPanel />
             </TabsContent>
-        </div>
+        </ScrollArea>
       </Tabs>
     </aside>
   )

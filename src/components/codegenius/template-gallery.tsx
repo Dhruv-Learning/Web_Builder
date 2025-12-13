@@ -13,12 +13,12 @@ export default function TemplateGallery() {
   return (
     <div className="space-y-4">
       <h3 className="font-semibold text-lg font-headline">Explore Templates</h3>
-      <div className="space-y-4">
+      <div className="grid gap-4">
         {templates.map((template) => {
           const placeholder = PlaceHolderImages.find(p => p.id === template.id);
           return (
-            <Card key={template.id}>
-              <CardContent className="p-4 space-y-3">
+            <Card key={template.id} className="overflow-hidden">
+              <CardContent className="p-0">
                 {placeholder && (
                   <Image
                     src={placeholder.imageUrl}
@@ -26,16 +26,18 @@ export default function TemplateGallery() {
                     width={600}
                     height={400}
                     data-ai-hint={placeholder.imageHint}
-                    className="rounded-md aspect-video object-cover"
+                    className="w-full h-auto aspect-[4/3] object-cover"
                   />
                 )}
-                <div className="space-y-1">
-                  <h4 className="font-semibold font-headline">{template.name}</h4>
-                  <p className="text-sm text-muted-foreground">{template.description}</p>
+                <div className="p-4 space-y-3">
+                    <div className="space-y-1">
+                        <h4 className="font-semibold font-headline">{template.name}</h4>
+                        <p className="text-sm text-muted-foreground">{template.description}</p>
+                    </div>
+                    <Button className="w-full gap-2" onClick={() => loadTemplate(template)}>
+                        <Layers className="w-4 h-4" /> Load Template
+                    </Button>
                 </div>
-                <Button className="w-full gap-2" onClick={() => loadTemplate(template)}>
-                  <Layers className="w-4 h-4" /> Load Template
-                </Button>
               </CardContent>
             </Card>
           )

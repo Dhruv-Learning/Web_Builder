@@ -50,7 +50,7 @@ export const templates: Template[] = [
   },
   {
     id: 'template-dark-elegant',
-    name: 'Dark Elegant',
+    name: 'Dark & Elegant',
     description: 'A sophisticated and luxurious dark theme for premium brands.',
     config: {
       prompt: 'Build an elegant, dark-themed website for a luxury watch brand. Feature a stunning hero image, a section for featured products, details about craftsmanship, and a store locator. The color palette should be black, gold, and dark gray.',
@@ -84,6 +84,66 @@ export const templates: Template[] = [
       },
       fonts: {
         headline: 'Roboto',
+        body: 'Inter',
+      },
+    },
+  },
+    {
+    id: 'template-tech-saas',
+    name: 'Tech SaaS',
+    description: 'Modern and clean for a software-as-a-service company.',
+    config: {
+      prompt: 'Create a landing page for a SaaS product called "SynthWave". It needs a hero section with signup, feature list with icons, pricing table, and testimonials. Use a futuristic blue and purple color scheme.',
+      websiteType: 'saas',
+      colors: {
+        primary: '#4f46e5',
+        secondary: '#eef2ff',
+        accent: '#8b5cf6',
+        background: '#f8fafc',
+        text: '#1e293b',
+      },
+      fonts: {
+        headline: 'Space Grotesk',
+        body: 'Inter',
+      },
+    },
+  },
+  {
+    id: 'template-artistic-portfolio',
+    name: 'Artistic Portfolio',
+    description: 'A creative layout for artists and photographers to showcase work.',
+    config: {
+      prompt: 'Generate a creative portfolio for a photographer named "Elena Ray". It should feature a masonry-style grid for her photos, an "about me" section with a picture, and a contact form. The vibe should be artistic and minimalist.',
+      websiteType: 'portfolio',
+      colors: {
+        primary: '#c026d3',
+        secondary: '#fdf4ff',
+        accent: '#a855f7',
+        background: '#ffffff',
+        text: '#374151',
+      },
+      fonts: {
+        headline: 'Playfair Display',
+        body: 'Inter',
+      },
+    },
+  },
+    {
+    id: 'template-ecommerce-landing',
+    name: 'Ecommerce Landing',
+    description: 'A vibrant landing page for an online store or product.',
+    config: {
+      prompt: 'Create a landing page for a new sneaker release. It needs a large hero image of the shoe, a section detailing its features, customer reviews, and a prominent "Buy Now" button that scrolls to a purchase section.',
+      websiteType: 'ecommerce',
+      colors: {
+        primary: '#f59e0b',
+        secondary: '#fffbeb',
+        accent: '#fbbf24',
+        background: '#ffffff',
+        text: '#451a03',
+      },
+      fonts: {
+        headline: 'Space Grotesk',
         body: 'Inter',
       },
     },

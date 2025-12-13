@@ -4,16 +4,22 @@ import { useCodeGenius } from '@/context/codegenius-context';
 import { Card } from '../ui/card';
 import { Palette, Bot, Sparkles, Wand2, Loader2 } from 'lucide-react';
 import { Button } from '../ui/button';
+import Head from 'next/head';
 
 export default function PreviewWindow() {
-  const { generatedCode, config, isLoading, setPrompt } = useCodeGenius();
+  const { generatedCode, config, isLoading, setPrompt, generateWebsite } = useCodeGenius();
   const [iframeBody, setIframeBody] = useState('');
 
+  const headlineFont = config.fonts.headline.replace(/ /g, '+');
+  const bodyFont = config.fonts.body.replace(/ /g, '+');
+
   useEffect(() => {
+    const googleFontsLink = `https://fonts.googleapis.com/css2?family=${headlineFont}:wght@400;700&family=${bodyFont}:wght@400;700&display=swap`;
+    
     const customStyles = `
       <style>
-        body { font-family: ${config.fonts.body}, sans-serif !important; }
-        h1, h2, h3, h4, h5, h6 { font-family: ${config.fonts.headline}, sans-serif !important; }
+        body { font-family: '${config.fonts.body}', sans-serif !important; }
+        h1, h2, h3, h4, h5, h6 { font-family: '${config.fonts.headline}', sans-serif !important; }
         :root {
           --cg-primary: ${config.colors.primary};
           --cg-secondary: ${config.colors.secondary};
@@ -39,6 +45,7 @@ export default function PreviewWindow() {
       <html>
         <head>
           <script src="https://cdn.tailwindcss.com"></script>
+          <link href="${googleFontsLink}" rel="stylesheet">
           ${customStyles}
           <style>${generatedCode.css}</style>
         </head>
@@ -49,7 +56,12 @@ export default function PreviewWindow() {
       </html>
     `;
     setIframeBody(srcDoc);
-  }, [generatedCode, config]);
+  }, [generatedCode, config, headlineFont, bodyFont]);
+
+  const handlePromptClick = (prompt: string) => {
+    setPrompt(prompt);
+    generateWebsite(prompt);
+  };
 
   const Placeholder = () => (
     <div className="flex flex-col items-center justify-center h-full text-center p-8 bg-grid-pattern">
@@ -61,13 +73,13 @@ export default function PreviewWindow() {
         Your AI-powered web design partner. Describe your vision, and watch it come to life in real-time.
       </p>
       <div className="mt-8 space-y-2 w-full max-w-md">
-        <Button size="lg" variant="outline" className="w-full" onClick={() => setPrompt('A modern portfolio for a photographer named Jane Doe.')}>
+        <Button size="lg" variant="outline" className="w-full" onClick={() => handlePromptClick('A modern portfolio for a photographer named Jane Doe.')}>
           <Sparkles className="w-4 h-4 mr-2"/> Try a photographer portfolio
         </Button>
-        <Button size="lg" variant="outline" className="w-full" onClick={() => setPrompt('A landing page for a new SaaS product called "SynthWave".')}>
+        <Button size="lg" variant="outline" className="w-full" onClick={() => handlePromptClick('A landing page for a new SaaS product called "SynthWave".')}>
           <Bot className="w-4 h-4 mr-2"/> Create a landing page for a SaaS
         </Button>
-        <Button size="lg" variant="outline" className="w-full" onClick={() => setPrompt('A clean, modern blog about cooking and recipes.')}>
+        <Button size="lg" variant="outline" className="w-full" onClick={() => handlePromptClick('A clean, modern blog about cooking and recipes.')}>
           <Wand2 className="w-4 h-4 mr-2"/> Start a cooking blog
         </Button>
       </div>
@@ -85,20 +97,25 @@ export default function PreviewWindow() {
   )
 
   return (
-    <Card className="w-full h-full shadow-2xl shadow-primary/5 dark:shadow-black/20 overflow-hidden relative">
-      {isLoading && <LoadingState />}
-      <div className={`transition-opacity duration-500 ${isLoading && !generatedCode.html ? 'opacity-0' : 'opacity-100'} h-full`}>
-        {!generatedCode.html ? (
-          <Placeholder />
-        ) : (
-          <iframe
-            srcDoc={iframeBody}
-            title="Website Preview"
-            className="w-full h-full border-0"
-            sandbox="allow-scripts allow-same-origin"
-          />
-        )}
-      </div>
-    </Card>
+    <>
+      <Head>
+        <link href={`https://fonts.googleapis.com/css2?family=${headlineFont}:wght@400;700&family=${bodyFont}:wght@400;700&display=swap`} rel="stylesheet" />
+      </Head>
+      <Card className="w-full h-full shadow-2xl shadow-primary/5 dark:shadow-black/20 overflow-hidden relative">
+        {isLoading && <LoadingState />}
+        <div className={`transition-opacity duration-500 ${isLoading && !generatedCode.html ? 'opacity-0' : 'opacity-100'} h-full`}>
+          {!generatedCode.html ? (
+            <Placeholder />
+          ) : (
+            <iframe
+              srcDoc={iframeBody}
+              title="Website Preview"
+              className="w-full h-full border-0"
+              sandbox="allow-scripts allow-same-origin"
+            />
+          )}
+        </div>
+      </Card>
+    </>
   );
 }

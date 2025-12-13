@@ -19,7 +19,7 @@ export type AutoFixDesignInput = z.infer<typeof AutoFixDesignInputSchema>;
 const AutoFixDesignOutputSchema = z.object({
   improvedWebsiteContent: z
     .string()
-    .describe('The improved HTML/CSS content of the website with better design.'),
+    .describe('The improved HTML/CSS content of the website with better design. This should be a full HTML document including body and style tags.'),
 });
 export type AutoFixDesignOutput = z.infer<typeof AutoFixDesignOutputSchema>;
 
@@ -31,7 +31,17 @@ const prompt = ai.definePrompt({
   name: 'autoFixDesignPrompt',
   input: {schema: AutoFixDesignInputSchema},
   output: {schema: AutoFixDesignOutputSchema},
-  prompt: `You are an AI design expert. You will receive website content (HTML and CSS) and your task is to improve the design based on modern design principles, including color palettes, spacing, and overall aesthetics. Return the improved HTML/CSS code. Website content: {{{websiteContent}}}`,
+  prompt: `You are an AI design expert. You will receive website content (HTML and embedded CSS) and your task is to improve the design based on modern design principles. 
+  
+  Your primary goal is to adjust layout, spacing, typography, and color harmony. You should NOT add new elements or drastically change the content.
+  
+  Return the full, improved HTML document, including the <style> and <body> tags.
+
+  Original website content: 
+  \`\`\`html
+  {{{websiteContent}}}
+  \`\`\`
+  `,
 });
 
 const autoFixDesignFlow = ai.defineFlow(

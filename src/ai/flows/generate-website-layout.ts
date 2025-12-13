@@ -17,13 +17,10 @@ const GenerateWebsiteLayoutInputSchema = z.object({
 export type GenerateWebsiteLayoutInput = z.infer<typeof GenerateWebsiteLayoutInputSchema>;
 
 const GenerateWebsiteLayoutOutputSchema = z.object({
-  html: z.string().describe('The HTML code for the website layout.'),
+  html: z.string().describe('The HTML code for the website layout, including only the content for the <body> tag.'),
   css: z.string().describe('The CSS code for the website layout.'),
-  javascript: z.string().describe('The JavaScript code for the website logic and functionality.'),
+  javascript: z.string().describe('The JavaScript code for the website logic and functionality. This should be pure Javascript, no script tags.'),
   sections: z.array(z.string()).describe('The sections of the website.'),
-  placeholderImages: z.array(z.string()).describe('Placeholder image URLs.'),
-  navigationBar: z.string().describe('The HTML code for the navigation bar.'),
-  footer: z.string().describe('The HTML code for the footer.'),
 });
 export type GenerateWebsiteLayoutOutput = z.infer<typeof GenerateWebsiteLayoutOutputSchema>;
 
@@ -35,24 +32,22 @@ const prompt = ai.definePrompt({
   name: 'generateWebsiteLayoutPrompt',
   input: {schema: GenerateWebsiteLayoutInputSchema},
   output: {schema: GenerateWebsiteLayoutOutputSchema},
-  prompt: `You are an expert web developer specializing in generating fully functional websites based on user prompts.
+  prompt: `You are an expert web developer specializing in generating fully functional, responsive, and modern websites based on user prompts.
 
-You will generate HTML, CSS, and JavaScript code for the website, including sections, placeholder images, a navigation bar, and a footer. The generated website should be interactive and dynamic, with all the logic implemented in the provided JavaScript.
+You will generate HTML, CSS, and JavaScript code for the website. The generated website must be interactive and dynamic, with all the logic implemented in the provided JavaScript.
 
 Use the following information to generate the website:
 
 Prompt: {{{prompt}}}
 
-Ensure the generated code is well-structured, readable, and follows modern web development best practices.
+Important Instructions:
+1.  **HTML**: Provide only the content for the \`<body>\` tag. Do not include \`<html>\`, \`<head>\`, or \`<body>\` tags. Use semantic HTML5 tags. Use TailwindCSS classes for styling directly in the HTML.
+2.  **CSS**: Provide any additional CSS needed for animations, complex layouts, or custom styles not achievable with standard Tailwind. Do not wrap in \`<style>\` tags.
+3.  **JavaScript**: Provide the complete client-side JavaScript to make the site functional. This includes event listeners, calculations, DOM manipulation, etc. Do not wrap in \`<script>\` tags.
+4.  **Responsiveness**: Ensure the layout is fully responsive and looks great on all screen sizes, from mobile to desktop. Use Tailwind's responsive prefixes (e.g., \`md:\`, \`lg:\`).
+5.  **Sections**: Return an array of strings, where each string is the ID of a main section in the website (e.g., "hero", "about", "services").
 
-The output should include:
-- html: The complete HTML code for the website layout.
-- css: The complete CSS code for the website layout.
-- javascript: The complete JavaScript code for the website's functionality and logic.
-- sections: An array of strings, where each string is the name of a section in the website.
-- placeholderImages: An array of placeholder image URLs.
-- navigationBar: The HTML code for the navigation bar.
-- footer: The HTML code for the footer.
+The output must be a valid JSON object matching the specified schema.
 `,
 });
 

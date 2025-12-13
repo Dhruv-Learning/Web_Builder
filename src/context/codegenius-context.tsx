@@ -7,14 +7,14 @@ import { useToast } from '@/hooks/use-toast';
 import { type Template, templates } from '@/lib/templates';
 import { WEBSITE_TYPES, FONT_FACES, COLOR_PALETTES } from '@/lib/constants';
 
-type GeneratedCode = {
+export type GeneratedCode = {
   html: string;
   css: string;
   javascript: string;
   sections: string[];
 };
 
-type AppConfig = {
+export type AppConfig = {
   websiteType: string;
   colors: {
     primary: string;
@@ -121,11 +121,21 @@ export function CodeGeniusProvider({ children }: { children: ReactNode }) {
         // This is simplified. We'd need to parse the HTML and CSS apart.
         const htmlMatch = designResult.improvedWebsiteContent.match(/<body>([\s\S]*)<\/body>/);
         const cssMatch = designResult.improvedWebsiteContent.match(/<style>([\s\S]*)<\/style>/);
-        setGeneratedCode(prev => ({
-            ...prev,
-            html: htmlMatch ? htmlMatch[1] : prev.html,
-            css: cssMatch ? cssMatch[1] : prev.css,
-        }));
+        
+        if (htmlMatch && cssMatch) {
+            setGeneratedCode(prev => ({
+                ...prev,
+                html: htmlMatch[1],
+                css: cssMatch[1],
+            }));
+        } else if (htmlMatch) {
+             setGeneratedCode(prev => ({ ...prev, html: htmlMatch[1]}));
+        }
+         else {
+            // If no body or style tags are found, maybe the whole thing is HTML
+            setGeneratedCode(prev => ({ ...prev, html: designResult.improvedWebsiteContent }));
+        }
+
     } catch (error) {
         console.error(error);
         toast({ title: "Failed to fix design", description: "Could not improve the design.", variant: "destructive" });

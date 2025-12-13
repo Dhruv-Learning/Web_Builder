@@ -10,7 +10,7 @@ import { LayoutTemplate, Brush, Download } from 'lucide-react';
 export default function CodeGeniusSidebar() {
   return (
     <aside className="w-full max-w-sm border-r bg-card flex flex-col">
-      <Tabs defaultValue="design" className="flex-1 flex flex-col overflow-hidden">
+      <Tabs defaultValue="design" className="flex-1 flex flex-col">
         <TabsList className="grid w-full grid-cols-3 rounded-none h-14">
           <TabsTrigger value="design" className="h-full rounded-none gap-2">
             <Brush className="w-4 h-4" /> Design

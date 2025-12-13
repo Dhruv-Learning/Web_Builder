@@ -19,6 +19,7 @@ export type GenerateWebsiteLayoutInput = z.infer<typeof GenerateWebsiteLayoutInp
 const GenerateWebsiteLayoutOutputSchema = z.object({
   html: z.string().describe('The HTML code for the website layout.'),
   css: z.string().describe('The CSS code for the website layout.'),
+  javascript: z.string().describe('The JavaScript code for the website logic and functionality.'),
   sections: z.array(z.string()).describe('The sections of the website.'),
   placeholderImages: z.array(z.string()).describe('Placeholder image URLs.'),
   navigationBar: z.string().describe('The HTML code for the navigation bar.'),
@@ -34,11 +35,11 @@ const prompt = ai.definePrompt({
   name: 'generateWebsiteLayoutPrompt',
   input: {schema: GenerateWebsiteLayoutInputSchema},
   output: {schema: GenerateWebsiteLayoutOutputSchema},
-  prompt: `You are an expert web developer specializing in generating website layouts based on user prompts.
+  prompt: `You are an expert web developer specializing in generating fully functional websites based on user prompts.
 
-You will generate HTML and CSS code for the website layout, including sections, placeholder images, a navigation bar, and a footer.
+You will generate HTML, CSS, and JavaScript code for the website, including sections, placeholder images, a navigation bar, and a footer. The generated website should be interactive and dynamic, with all the logic implemented in the provided JavaScript.
 
-Use the following information to generate the website layout:
+Use the following information to generate the website:
 
 Prompt: {{{prompt}}}
 
@@ -47,6 +48,7 @@ Ensure the generated code is well-structured, readable, and follows modern web d
 The output should include:
 - html: The complete HTML code for the website layout.
 - css: The complete CSS code for the website layout.
+- javascript: The complete JavaScript code for the website's functionality and logic.
 - sections: An array of strings, where each string is the name of a section in the website.
 - placeholderImages: An array of placeholder image URLs.
 - navigationBar: The HTML code for the navigation bar.

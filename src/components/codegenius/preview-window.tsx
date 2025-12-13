@@ -44,6 +44,7 @@ export default function PreviewWindow() {
         </head>
         <body class="antialiased">
           ${generatedCode.html}
+          <script>${generatedCode.javascript}</script>
         </body>
       </html>
     `;

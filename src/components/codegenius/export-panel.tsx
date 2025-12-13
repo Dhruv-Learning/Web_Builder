@@ -24,11 +24,14 @@ export default function ExportPanel() {
         </head>
         <body>
           ${generatedCode.html}
+          <script src="script.js"></script>
         </body>
       </html>
     `;
     zip.file("index.html", fullHtml);
     zip.file("style.css", generatedCode.css);
+    zip.file("script.js", generatedCode.javascript);
+
     zip.generateAsync({ type: "blob" }).then((content) => {
       const link = document.createElement("a");
       link.href = URL.createObjectURL(content);
@@ -65,11 +68,13 @@ export default function ExportPanel() {
         </head>
         <body>
           ${generatedCode.html}
+           <script src="script.js"></script>
         </body>
       </html>
     `;
     download("index.html", fullHtml, "text/html");
     download("style.css", generatedCode.css, "text/css");
+    download("script.js", generatedCode.javascript, "text/javascript");
 
     toast({
       title: "Downloading Files",

@@ -10,6 +10,7 @@ import { WEBSITE_TYPES, FONT_FACES, COLOR_PALETTES } from '@/lib/constants';
 type GeneratedCode = {
   html: string;
   css: string;
+  javascript: string;
   sections: string[];
 };
 
@@ -44,7 +45,7 @@ type CodeGeniusContextType = {
 const defaultState: CodeGeniusContextType = {
   prompt: '',
   setPrompt: () => {},
-  generatedCode: { html: '', css: '', sections: [] },
+  generatedCode: { html: '', css: '', javascript: '', sections: [] },
   config: {
     websiteType: WEBSITE_TYPES[0].id,
     colors: COLOR_PALETTES[0].colors,
@@ -69,7 +70,7 @@ export function useCodeGenius() {
 
 export function CodeGeniusProvider({ children }: { children: ReactNode }) {
   const [prompt, setPrompt] = useState('');
-  const [generatedCode, setGeneratedCode] = useState<GeneratedCode>({ html: '', css: '', sections: [] });
+  const [generatedCode, setGeneratedCode] = useState<GeneratedCode>({ html: '', css: '', javascript: '', sections: [] });
   const [config, setConfig] = useState<AppConfig>(defaultState.config);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
@@ -85,6 +86,7 @@ export function CodeGeniusProvider({ children }: { children: ReactNode }) {
       setGeneratedCode({
         html: result.html,
         css: result.css,
+        javascript: result.javascript,
         sections: result.sections,
       });
     } catch (error) {
@@ -119,11 +121,11 @@ export function CodeGeniusProvider({ children }: { children: ReactNode }) {
         // This is simplified. We'd need to parse the HTML and CSS apart.
         const htmlMatch = designResult.improvedWebsiteContent.match(/<body>([\s\S]*)<\/body>/);
         const cssMatch = designResult.improvedWebsiteContent.match(/<style>([\s\S]*)<\/style>/);
-        setGeneratedCode({
-            html: htmlMatch ? htmlMatch[1] : generatedCode.html,
-            css: cssMatch ? cssMatch[1] : generatedCode.css,
-            sections: generatedCode.sections,
-        });
+        setGeneratedCode(prev => ({
+            ...prev,
+            html: htmlMatch ? htmlMatch[1] : prev.html,
+            css: cssMatch ? cssMatch[1] : prev.css,
+        }));
     } catch (error) {
         console.error(error);
         toast({ title: "Failed to fix design", description: "Could not improve the design.", variant: "destructive" });

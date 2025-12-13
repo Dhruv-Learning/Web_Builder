@@ -10,9 +10,7 @@ export default function CodeGeniusMain() {
       <div className="flex flex-col h-screen bg-background text-foreground font-body">
         <Header />
         <main className="flex flex-1 border-t border-border overflow-hidden">
-          <div className="hidden md:flex">
-            <CodeGeniusSidebar />
-          </div>
+          <CodeGeniusSidebar />
           <div className="flex-1 p-4 md:p-6 lg:p-8 bg-muted/30 dark:bg-muted/10 overflow-y-auto">
             <PreviewWindow />
           </div>

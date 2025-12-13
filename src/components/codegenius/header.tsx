@@ -1,5 +1,6 @@
 'use client';
 import { Palette } from 'lucide-react';
+import { ThemeToggle } from '../theme-toggle';
 
 export default function Header() {
   return (
@@ -7,6 +8,9 @@ export default function Header() {
       <div className="flex items-center gap-2">
         <Palette className="w-7 h-7 text-primary" />
         <h1 className="text-xl font-bold font-headline tracking-tight">CodeGenius</h1>
+      </div>
+      <div className="flex items-center gap-2">
+        <ThemeToggle />
       </div>
     </header>
   );

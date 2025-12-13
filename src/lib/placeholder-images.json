@@ -1,3 +1,46 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "template-modern-minimal",
+      "description": "Preview of Modern Minimal template",
+      "imageUrl": "https://images.unsplash.com/photo-1599669846660-945c5c775181?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxtaW5pbWFsJTIwYXJjaGl0ZWN0dXJlfGVufDB8fHx8MTc2NTU5NDkzMHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "minimal architecture"
+    },
+    {
+      "id": "template-vibrant-colorful",
+      "description": "Preview of Vibrant Colorful template",
+      "imageUrl": "https://images.unsplash.com/photo-1699307152365-399bf53f55a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxjb2xvcmZ1bCUyMGFic3RyYWN0fGVufDB8fHx8MTc2NTUyNDgxM3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "colorful abstract"
+    },
+    {
+      "id": "template-dark-elegant",
+      "description": "Preview of Dark Elegant template",
+      "imageUrl": "https://images.unsplash.com/photo-1657471742624-962ab69843d2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxkYXJrJTIwbHV4dXJ5fGVufDB8fHx8MTc2NTU5NDkzMHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "dark luxury"
+    },
+    {
+      "id": "template-corporate",
+      "description": "Preview of Corporate template",
+      "imageUrl": "https://images.unsplash.com/photo-1431540015161-0bf868a2d407?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxvZmZpY2UlMjBidWlsZGluZ3xlbnwwfHx8fDE3NjU0OTczODd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "office building"
+    },
+    {
+      "id": "template-tech-saas",
+      "description": "Preview of Tech/SaaS template",
+      "imageUrl": "https://images.unsplash.com/photo-1564457461758-8ff96e439e83?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxzZXJ2ZXIlMjByb29tfGVufDB8fHx8MTc2NTU3NTU1MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "server room"
+    },
+    {
+      "id": "template-artistic-portfolio",
+      "description": "Preview of Artistic Portfolio template",
+      "imageUrl": "https://images.unsplash.com/photo-1564399580075-5dfe19c205f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxhcnQlMjBnYWxsZXJ5fGVufDB8fHx8MTc2NTUxMDczM3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "art gallery"
+    },
+    {
+      "id": "template-ecommerce-landing",
+      "description": "Preview of Ecommerce Landing template",
+      "imageUrl": "https://images.unsplash.com/photo-1674027392887-751d6396b710?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8b25saW5lJTIwc2hvcHBpbmd8ZW58MHx8fHwxNzY1NTkyNzk0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "online shopping"
+    }
+  ]
 }

@@ -1,3 +1,9 @@
+import CodeGeniusMain from '@/components/codegenius/codegenius-main';
+
 export default function Home() {
-  return <></>;
+  return (
+    <main>
+      <CodeGeniusMain />
+    </main>
+  );
 }
